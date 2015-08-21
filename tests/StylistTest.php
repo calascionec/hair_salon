@@ -134,6 +134,23 @@
 
         }
 
+        function testUpdate()
+        {
+            //Arrange
+            $name = "Bob";
+            $test_Stylist = new Stylist($name);
+            $test_Stylist->save();
+
+            $new_name = "Alice";
+
+            //Act
+            $test_Stylist->update($new_name);
+
+            //Assert
+            $this->assertEquals("Alice", $test_Stylist->getName());
+        }
+        
+
     }
 
 
