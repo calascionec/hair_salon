@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Hair Salon</title>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to your Salon app!</h1>
+            <p>
+                Here you can add the names of your stylists.
+            </p>
+
+            <form action="/stylists" method="post">
+
+                <label for="name">Stylist Name:</label>
+                <input type="text" name="name" id="name" class="form-control">
+                <button type="submit" class="btn btn-submit">Add</button>
+
+            </form>
+
+            {% if stylists is not empty %}
+                <h4>Stylists:</h4>
+                <ul>
+                    {% for stylist in stylists %}
+                        <li>
+                            <a href="/stylist/{{ stylist.getId }}">{{ stylist.getName }}</a>
+
+                            <ul class="list-unstyled list-inline">
+                                <li>
+                                    <form action="/stylist/{{ stylist.getId }}/edit">
+                                        <button type="submit" class="btn btn-submit">Update</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="/stylist/{{ stylist.getId }}/delete" method="post">
+                                        <input type="hidden" name="_method" value="delete">
+
+                                        <button type="submit" class="btn btn-submit">Delete</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h4>There are currently no stylists!</h4>
+            {% endif %}
+
+            <form action="/delete_stylists" method="post">
+                <button type="submit" class="btn btn-danger">Clear All</button>
+            </form>
+        </div>
+
+
+    </body>
+</html>
