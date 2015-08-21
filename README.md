@@ -14,7 +14,12 @@ about each individual stylist's customers.
 1. Clone this repository
 2. Run $ composer install in project directory
 3. Start MySql and Apache servers
-4. Add hair_salon database to MySQL databases
+4. Add hair_salon database to MySQL databases:
+    1. CREATE DATABASE hair_salon;
+    2. USE hair_salon;
+    3.CREATE TABLE stylists (name VARCHAR (255), id SERIAL PRIMARY KEY);
+    4.CREATE TABLE clients (name VARCHAR (255), phone_number INT(10), date_added DATE, stylist_id INT, id SERIAL PRIMARY KEY);
+
 5. Start PHP server in web directory
 6. Navigate to localhost:8000
 7. Enjoy!
