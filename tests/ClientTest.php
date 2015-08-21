@@ -19,11 +19,11 @@
 
     class ClientTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Stylist::deleteAll();
-        //     Client::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Stylist::deleteAll();
+            Client::deleteAll();
+        }
 
         function test_getName()
         {
@@ -190,7 +190,7 @@
             $date_added = "2015-08-20";
             $stylist_id = 2;
             $id = 4;
-            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
 
             $new_id = 1;
 
@@ -200,6 +200,78 @@
 
             //Arrange
             $this->assertEquals($new_id, $result);
+        }
+
+        function test_save()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $id = 4;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+
+            //Act
+            $test_client->save();
+
+            //Assert
+            $result = Client::getAll();
+            $this->assertEquals($test_client, $result[0]);
+
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $id = 4;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+            $test_client->save();
+
+            $name2 = "Chris";
+            $phone_number2 = "9999999999";
+            $date_added2 = "2015-08-20";
+            $stylist_id2 = 2;
+            $id2 = 4;
+            $test_client2 = new Client($name2, $phone_number2, $date_added2, $stylist_id2, $id2);
+            $test_client2->save();
+
+            //Act
+            $result = Client::getAll();
+
+            //Assert
+            $this->assertEquals([$test_client, $test_client2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $id = 4;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+            $test_client->save();
+
+            $name2 = "Chris";
+            $phone_number2 = "9999999999";
+            $date_added2 = "2015-08-20";
+            $stylist_id2 = 2;
+            $id2 = 4;
+            $test_client2 = new Client($name2, $phone_number2, $date_added2, $stylist_id2, $id2);
+            $test_client2->save();
+
+            //Act
+            Client::deleteAll();
+
+            //Assert
+            $result = Client::getAll();
+            $this->assertEquals([], $result);
         }
 
 

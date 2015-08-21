@@ -70,6 +70,36 @@
             $this->id = $new_id;
         }
 
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO clients (name, phone_number, date_added, stylist_id) VALUES ('{$this->getName()}', {$this->getPhoneNumber()}, '{$this->getDateAdded()}', {$this->getStylistId()});");
+            $result_id = $GLOBALS['DB']->lastInsertId();
+            $this->setId($result_id);
+        }
+
+        //Static functions
+
+        static function getAll()
+        {
+            $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients;");
+            $clients = array();
+            foreach($returned_clients as $client) {
+                $name = $client['name'];
+                $phone_number = $client['phone_number'];
+                $date_added = $client['date_added'];
+                $stylist_id = $client['stylist_id'];
+                $id = $client['id'];
+                $new_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+                array_push($clients, $new_client);
+            }
+            return $clients;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM clients;");
+        }
+
 
     }
 
