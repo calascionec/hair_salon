@@ -79,6 +79,29 @@
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
 
+    //Delete all clients
+    $app->post('/delete_clients', function() use ($app) {
+        Client::deleteAll();
+        $stylist = Stylist::find($_POST['stylist_id']);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+    });
+
+    //Display update page for a client
+    $app->get('/client/{id}/edit', function($id) use ($app) {
+        $client = Client::find($id);
+        $stylist_id = $client->getStylistId();
+        return $app['twig']->render('edit_client.html.twig', array('client' => $client, 'stylist' => $stylist_id));
+    });
+
+    //Delete single restaurant
+    $app->delete("/client/{id}/delete", function($id) use ($app) {
+        $client = Client::find($id);
+        $client->delete();
+        $stylist = Stylist::find($_POST['stylist_id']);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+
+    });
+
     return $app;
 
  ?>

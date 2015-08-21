@@ -72,7 +72,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO clients (name, phone_number, date_added, stylist_id) VALUES ('{$this->getName()}', {$this->getPhoneNumber()}, '{$this->getDateAdded()}', {$this->getStylistId()});");
+            $GLOBALS['DB']->exec("INSERT INTO clients (name, phone_number, date_added, stylist_id) VALUES ('{$this->getName()}', '{$this->getPhoneNumber()}', '{$this->getDateAdded()}', {$this->getStylistId()});");
             $result_id = $GLOBALS['DB']->lastInsertId();
             $this->setId($result_id);
         }
