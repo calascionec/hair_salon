@@ -10,14 +10,14 @@
         private $id;
 
 
-        function __construct($name, $phone_number, $date_added, $stylist_id, $id)
+        function __construct($name, $phone_number, $date_added, $stylist_id, $id = null)
         {
 
             $this->name = $name;
             $this->phone_number = $phone_number;
             $this->date_added = $date_added;
             $this->stylist_id = $stylist_id;
-            $this->id = $id
+            $this->id = $id;
         }
 
         function getName()
