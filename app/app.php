@@ -44,6 +44,23 @@
         return $app['twig']->render("edit_stylist.html.twig", array('stylist' => $stylist));
     });
 
+    //Updates the name of the stylist and returns to the root route
+    $app->patch("/stylists/{id}", function($id) use ($app) {
+        if ( !empty($_POST['name'])) {
+            $name = $_POST['name'];
+            $stylist = Stylist::find($id);
+            $stylist->update($name);
+        }
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+    });
+
+    //Deletes individual stylist
+    $app->delete("/stylist/{id}/delete", function($id) use ($app) {
+        $stylist = Stylist::find($id);
+        $stylist->delete();
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+    });
+
 
 
     return $app;
