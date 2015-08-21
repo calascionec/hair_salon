@@ -106,6 +106,102 @@
             $this->assertEquals($id, $result);
         }
 
+        function test_setName()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
+
+            $new_name = "Tom";
+
+            //Act
+            $test_client->setName($new_name);
+            $result = $test_client->getName();
+
+            //Arrange
+            $this->assertEquals($new_name, $result);
+        }
+
+        function test_setPhoneNumber()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
+
+            $new_phone_number = "5555555555";
+
+            //Act
+            $test_client->setPhoneNumber($new_phone_number);
+            $result = $test_client->getPhoneNumber();
+
+            //Arrange
+            $this->assertEquals($new_phone_number, $result);
+        }
+
+        function test_setDateAdded()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
+
+            $new_date_added = "2014-09-01";
+
+            //Act
+            $test_client->setDateAdded($new_date_added);
+            $result = $test_client->getDateAdded();
+
+            //Arrange
+            $this->assertEquals($new_date_added, $result);
+        }
+
+        function test_setStylistId()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
+
+            $new_stylist_id= 3;
+
+            //Act
+            $test_client->setStylistId($new_stylist_id);
+            $result = $test_client->getStylistId();
+
+            //Arrange
+            $this->assertEquals($new_stylist_id, $result);
+        }
+
+        function test_setId()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $id = 4;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
+
+            $new_id = 1;
+
+            //Act
+            $test_client->setId($new_id);
+            $result = $test_client->getId();
+
+            //Arrange
+            $this->assertEquals($new_id, $result);
+        }
+
 
     }
 
