@@ -224,20 +224,21 @@
         function test_getAll()
         {
             //Arrange
+            $name = "Bob";
+            $test_stylist = new Stylist($name);
+            $test_stylist->save();
+
+            $stylist_id = $test_stylist->getId();
             $name = "Chris";
             $phone_number = "9999999999";
             $date_added = "2015-08-20";
-            $stylist_id = 2;
-            $id = 4;
-            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
             $test_client->save();
 
             $name2 = "Bob";
             $phone_number2 = "7777777777";
             $date_added2 = "2011-08-20";
-            $stylist_id2 = 2;
-            $id2 = 4;
-            $test_client2 = new Client($name2, $phone_number2, $date_added2, $stylist_id2, $id2);
+            $test_client2 = new Client($name2, $phone_number2, $date_added2, $stylist_id);
             $test_client2->save();
 
             //Act
@@ -250,20 +251,22 @@
         function test_deleteAll()
         {
             //Arrange
+            $name = "Bob";
+            $test_stylist = new Stylist($name);
+            $test_stylist->save();
+
+            $stylist_id = $test_stylist->getId();
+
             $name = "Chris";
             $phone_number = "9999999999";
             $date_added = "2015-08-20";
-            $stylist_id = 2;
-            $id = 4;
-            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
             $test_client->save();
 
             $name2 = "Bob";
             $phone_number2 = "7777777777";
             $date_added2 = "2011-08-20";
-            $stylist_id2 = 2;
-            $id2 = 4;
-            $test_client2 = new Client($name2, $phone_number2, $date_added2, $stylist_id2, $id2);
+            $test_client2 = new Client($name2, $phone_number2, $date_added2, $stylist_id);
             $test_client2->save();
 
             //Act
