@@ -54,10 +54,17 @@
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-    //Deletes individual stylist
+    //Deletes individual stylist and only there clients
     $app->delete("/stylists/{id}/delete", function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->delete();
+        $clients = Client::getAll();
+        foreach($clients as $client){
+            if ($client->getStylistId() == $stylist->getId()) {
+                $client->delete();
+            }
+        }
+
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
