@@ -77,6 +77,12 @@
             $this->setId($result_id);
         }
 
+        function update($column_update, $new_info)
+        {
+            $GLOBALS['DB']->exec("UPDATE clients SET {$column_update} = '{$new_info}' WHERE id = {$this->getId()};");
+        }
+
+
         //Static functions
 
         static function getAll()

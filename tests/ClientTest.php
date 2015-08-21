@@ -274,6 +274,28 @@
             $this->assertEquals([], $result);
         }
 
+        function testUpdateName()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $id = 4;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+            $test_client->save();
+
+            $new_name = "Tom";
+            $column_update = "name";
+
+            //Act
+            $test_client->update($column_update, $new_name);
+
+            //Assert
+            $result = Client::getAll();
+            $this->assertEquals("Tom", $result[0]->getName());
+        }
+
 
     }
 
