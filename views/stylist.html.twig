@@ -26,11 +26,11 @@
                             <input type="date" name="date_added" id="date_added" class="form-control" required>
                         </div>
 
-                        <button type='submit'>Submit</button>
+                        <button type='submit'>Create New Client</button>
                     </form>
                     <form action="/delete_clients" method="post">
                         <input id='stylist_id' name='stylist_id' type='hidden' value='{{ stylist.getId() }}'>
-                        <button type="submit">Clear</button>
+                        <button type="submit">Clear all of {{stylist.getName}}'s Clients</button>
                     </form>
                     <a href='/'>Home</a>
                 </div>

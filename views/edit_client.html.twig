@@ -5,6 +5,7 @@
     </head>
     <body>
         <div class = "container">
+            <h1>Update {{client.getName}}'s Information</h1>
             <form action = '/client/{{client.getId}}' method = 'post'>
                 <input id='stylist_id' name='stylist_id' type='hidden' value='{{ client.getStylistId }}'>
                 <input name="_method" type="hidden" value="patch">
