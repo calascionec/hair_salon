@@ -39,7 +39,7 @@
     });
 
     //Take you to update page for a stylist
-    $app->get('/stylist/{id}/edit', function($id) use ($app) {
+    $app->get('/stylists/{id}/edit', function($id) use ($app) {
         $stylist = Stylist::find($id);
         return $app['twig']->render("edit_stylist.html.twig", array('stylist' => $stylist));
     });
@@ -55,13 +55,17 @@
     });
 
     //Deletes individual stylist
-    $app->delete("/stylist/{id}/delete", function($id) use ($app) {
+    $app->delete("/stylists/{id}/delete", function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->delete();
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-
+    //Display one stylist and their clients
+    $app->get("/stylists/{id}", function($id) use ($app) {
+        $stylist = Stylist::find($id);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+    });
 
     return $app;
 

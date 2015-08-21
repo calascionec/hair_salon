@@ -23,16 +23,16 @@
                 <ul>
                     {% for stylist in stylists %}
                         <li>
-                            <a href="/stylist/{{ stylist.getId }}">{{ stylist.getName }}</a>
+                            <a href="/stylists/{{ stylist.getId }}">{{ stylist.getName }}</a>
 
                             <ul class="list-unstyled list-inline">
                                 <li>
-                                    <form action="/stylist/{{ stylist.getId }}/edit">
+                                    <form action="/stylists/{{ stylist.getId }}/edit">
                                         <button type="submit" class="btn btn-primary">Update</button>
                                     </form>
                                 </li>
                                 <li>
-                                    <form action="/stylist/{{ stylist.getId }}/delete" method="post">
+                                    <form action="/stylists/{{ stylist.getId }}/delete" method="post">
                                         <input type="hidden" name="_method" value="delete">
 
                                         <button type="submit" class="btn btn-primary">Delete</button>
