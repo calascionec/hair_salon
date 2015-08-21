@@ -93,6 +93,21 @@
         return $app['twig']->render('edit_client.html.twig', array('client' => $client, 'stylist' => $stylist_id));
     });
 
+    //Updates client information and returns to stylist page
+    $app->patch('/client/{id}', function($id) use ($app) {
+        $client = Client::find($id);
+        $stylist = Stylist::find($_POST['stylist_id']);
+        foreach($_POST as $key => $value) {
+            var_dump($key);
+            var_dump($value);
+            if ( !empty($value) ) {
+                $client->update($key, $value);
+            }
+        }
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+
+    });
+
     //Delete single restaurant
     $app->delete("/client/{id}/delete", function($id) use ($app) {
         $client = Client::find($id);
