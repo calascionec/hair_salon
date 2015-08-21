@@ -124,20 +124,6 @@
             return $found_client;
         }
 
-        static function findStylist($search_id)
-        {
-            $found_client = null;
-            $clients = Client::getAll();
-            foreach($clients as $client) {
-                $client_id = $client->getStylistId();
-                if ($client_id == $search_id) {
-                    $found_client = $client;
-                }
-            }
-            return $found_client;
-        }
-
-
     }
 
  ?>

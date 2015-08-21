@@ -32,9 +32,10 @@
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-    //Delete all stylists
+    //Delete all stylists, When all stylists are deleted so are all of their clients
     $app->post('/delete_stylists', function() use ($app) {
         Stylist::deleteAll();
+        Client::deleteAll();
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
@@ -54,7 +55,7 @@
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-    //Deletes individual stylist and only there clients
+    //Deletes individual stylist and only their clients
     $app->delete("/stylists/{id}/delete", function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->delete();
@@ -86,10 +87,15 @@
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
 
-    //Delete all clients
+    //Delete all clients of a particular stylist but not other stylist's clients
     $app->post('/delete_clients', function() use ($app) {
-        Client::deleteAll();
         $stylist = Stylist::find($_POST['stylist_id']);
+        $clients = Client::getAll();
+        foreach($clients as $client){
+            if ($client->getStylistId() == $stylist->getId()) {
+                $client->delete();
+            }
+        }
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
 
@@ -105,8 +111,7 @@
         $client = Client::find($id);
         $stylist = Stylist::find($_POST['stylist_id']);
         foreach($_POST as $key => $value) {
-            var_dump($key);
-            var_dump($value);
+
             if ( !empty($value) ) {
                 $client->update($key, $value);
             }
@@ -115,7 +120,7 @@
 
     });
 
-    //Delete single restaurant
+    //Delete single client
     $app->delete("/client/{id}/delete", function($id) use ($app) {
         $client = Client::find($id);
         $client->delete();
