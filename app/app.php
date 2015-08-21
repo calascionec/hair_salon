@@ -23,6 +23,27 @@
         return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
     });
 
+    //Add a stylist
+    $app->post('/stylists', function() use ($app) {
+        if (!empty($_POST['name'])) {
+            $stylist = new Stylist(preg_quote($_POST['name'], "'"));
+            $stylist->save();
+        }
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+    });
+
+    //Delete all stylists
+    $app->post('/delete_stylists', function() use ($app) {
+        Stylist::deleteAll();
+        return $app['twig']->render('index.html.twig', array('stylists' => Stylist::getAll()));
+    });
+
+    //Take you to update page for a stylist
+    $app->get('/stylist/{id}/edit', function($id) use ($app) {
+        $stylist = Stylist::find($id);
+        return $app['twig']->render("edit_stylist.html.twig", array('stylist' => $stylist));
+    });
+
 
 
     return $app;
