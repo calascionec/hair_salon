@@ -296,6 +296,79 @@
             $this->assertEquals("Tom", $result[0]->getName());
         }
 
+        function testUpdatePhoneNumber()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $id = 4;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+            $test_client->save();
+
+            $new_phone_number = "8888888888";
+            $column_update = "phone_number";
+
+            //Act
+            $test_client->update($column_update, $new_phone_number);
+
+            //Assert
+            $result = Client::getAll();
+            $this->assertEquals("8888888888", $result[0]->getPhoneNumber());
+        }
+
+        function testUpdateDateAdded()
+        {
+            //Arrange
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $stylist_id = 2;
+            $id = 4;
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id, $id);
+            $test_client->save();
+
+            $new_date_added = "2013-01-01";
+            $column_update = "date_added";
+
+            //Act
+            $test_client->update($column_update, $new_date_added);
+
+            //Assert
+            $result = Client::getAll();
+            $this->assertEquals("2013-01-01", $result[0]->getDateAdded());
+        }
+
+        function testDelete()
+        {
+            //Arrange
+            $name = "Bob";
+            $test_stylist = new Stylist($name);
+            $test_stylist->save();
+
+            $stylist_id = $test_stylist->getId();
+
+            $name = "Chris";
+            $phone_number = "9999999999";
+            $date_added = "2015-08-20";
+            $test_client = new Client($name, $phone_number, $date_added, $stylist_id);
+            $test_client->save();
+
+            $name2 = "Chris";
+            $phone_number2 = "9999999999";
+            $date_added2 = "2015-08-20";
+            $test_client2 = new Client($name2, $phone_number2, $date_added2, $stylist_id);
+            $test_client2->save();
+
+            //Act
+            $test_client->delete();
+
+            //Assert
+            $this->assertEquals([$test_client2], Client::getAll());
+        }
+
+
 
     }
 

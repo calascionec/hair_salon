@@ -82,6 +82,11 @@
             $GLOBALS['DB']->exec("UPDATE clients SET {$column_update} = '{$new_info}' WHERE id = {$this->getId()};");
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
+        }
+
 
         //Static functions
 
