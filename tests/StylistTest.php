@@ -17,11 +17,11 @@
 
     class StylistTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Stylist::deleteAll();
-        //     Client::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Stylist::deleteAll();
+            //Client::deleteAll();
+        }
 
         function test_getName()
         {
@@ -79,6 +79,59 @@
 
             //Assert
             $this->assertEquals($new_id, $result);
+        }
+
+        function test_save()
+        {
+            //Arrange
+            $name = "Bob";
+            $test_Stylist = new Stylist($name);
+            $test_Stylist->save();
+
+            //Act
+            $result = Stylist::getAll();
+
+            //Assert
+            $this->assertEquals($test_Stylist, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Bob";
+            $test_Stylist = new Stylist($name);
+            $test_Stylist->save();
+
+            $name2 = "Alice";
+            $test_Stylist2 = new Stylist($name);
+            $test_Stylist2->save();
+
+            //Act
+            $result = Stylist ::getAll();
+
+            //Assert
+            $this->assertEquals([$test_Stylist, $test_Stylist2], $result);
+
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $name = "Bob";
+            $test_Stylist = new Stylist($name);
+            $test_Stylist->save();
+
+            $name2 = "Alice";
+            $test_Stylist2 = new Stylist($name);
+            $test_Stylist2->save();
+
+            //Act
+            Stylist::deleteAll();
+            $result = Stylist ::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+
         }
 
     }
