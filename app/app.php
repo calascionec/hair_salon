@@ -2,7 +2,7 @@
 
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Stylist.php";
-    //require_once __DIR__."/../src/Client.php";
+    require_once __DIR__."/../src/Client.php";
 
     $app = new Silex\Application();
 
@@ -64,6 +64,18 @@
     //Display one stylist and their clients
     $app->get("/stylists/{id}", function($id) use ($app) {
         $stylist = Stylist::find($id);
+        return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
+    });
+
+    //Add a client to a stylist's page
+    $app->post('/client', function() use ($app) {
+        $name = preg_quote($_POST['name'], "'");
+        $phone_number = preg_quote($_POST['phone_number'], "'");
+        $date_added = preg_quote($_POST['date_added'], "'");
+        $stylist_id = preg_quote($_POST['stylist_id'], "'");
+        $client = new Client($name, $phone_number, $date_added, $stylist_id);
+        $client->save();
+        $stylist = Stylist::find($stylist_id);
         return $app['twig']->render('stylist.html.twig', array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
 
