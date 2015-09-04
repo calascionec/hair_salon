@@ -1,6 +1,6 @@
 # Hair Salon
 
-##### A list of restaurants grouped by cuisine, 08/20/15
+##### A list of stylists and their customers, 08/20/15
 
 #### By Christopher Calascione
 
